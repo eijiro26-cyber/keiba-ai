@@ -1,1 +1,284 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#16821a"><title>KEIBA AI</title><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css"></head><body><header>🏇 <b>KEIBA AI</b><small>出馬表スクショ → 自動読み取り → 予想</small></header><main><section><h2>① レース条件</h2><div class="grid"><label>競馬場<select id="course"><option>新潟</option><option>中京</option><option>東京</option><option>中山</option><option>阪神</option><option>京都</option></select></label><label>距離<input id="distance" type="number" value="2000"></label><label>馬場<select id="track"><option>良</option><option>稍重</option><option>重</option><option>不良</option></select></label><label>回数<select id="runs"><option value="100000">10万回</option><option value="500000">50万回</option><option value="1000000" selected>100万回</option></select></label></div></section><section><h2>② 出馬表のスクショ</h2><p>JRAの出馬表をスクショして、下の枠をタップして画像を選択。</p><input id="file" type="file" accept="image/*" hidden><div id="drop" class="drop">📷<br><b>出馬表の画像を選択</b><small>写真・スクショから選択</small></div><img id="preview" hidden><button id="read">画像を読み取る</button><button id="clear">クリア</button><div id="msg"></div></section><section id="edit" hidden><h2>③ 読み取り結果</h2><textarea id="text"></textarea><button id="predict">このデータで予想する</button></section><section id="result" hidden><h2>④ AI予想</h2><div id="summary"></div><div class="table"><table><thead><tr><th>印</th><th>馬</th><th>指数</th><th>勝率</th><th>3着内</th></tr></thead><tbody id="tbody"></tbody></table></div></section></main><footer>KEIBA AI prototype</footer><script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KEIBA AI</title>
+<style>
+body{margin:0;font-family:-apple-system,sans-serif;background:#f4f6fa;color:#172033}
+header{background:#075cff;color:white;padding:20px;font-size:25px;font-weight:bold}
+main{max-width:700px;margin:auto;padding:15px}
+.card{background:white;border-radius:16px;padding:18px;margin-bottom:15px;box-shadow:0 2px 10px #0001}
+button{background:#075cff;color:white;border:0;border-radius:10px;padding:14px 20px;font-size:16px;font-weight:bold}
+#preview{display:none;width:100%;max-height:350px;object-fit:contain;margin-top:15px}
+#bar{height:8px;background:#075cff;width:0;margin-top:12px;border-radius:10px}
+.horse{display:grid;grid-template-columns:45px 1fr 75px;gap:8px;align-items:center;background:#f6f8fb;padding:12px;margin:7px 0;border-radius:10px}
+.num{font-size:20px;font-weight:bold}
+.name{font-weight:bold}
+.prob{text-align:right;font-weight:bold}
+.hidden{display:none}
+pre{white-space:pre-wrap;background:#111827;color:white;padding:12px;border-radius:10px;font-size:12px}
+</style>
+</head>
+
+<body>
+
+<header>
+🏇 KEIBA AI
+<br>
+<small>出馬表スクショ予想</small>
+</header>
+
+<main>
+
+<div class="card">
+<h2>📷 出馬表を選択</h2>
+
+<input id="imageInput" type="file" accept="image/*">
+
+<img id="preview">
+
+<div id="bar"></div>
+<p id="status"></p>
+</div>
+
+<div class="card hidden" id="resultCard">
+<h2>🏆 AI予想</h2>
+<div id="result"></div>
+</div>
+
+<div class="card hidden" id="ocrCard">
+<h3>🔎 読み取った文字</h3>
+<pre id="ocr"></pre>
+</div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<script>
+
+const input=document.getElementById("imageInput");
+const preview=document.getElementById("preview");
+const bar=document.getElementById("bar");
+const status=document.getElementById("status");
+
+input.onchange=async()=>{
+
+const file=input.files[0];
+
+if(!file)return;
+
+preview.src=URL.createObjectURL(file);
+preview.style.display="block";
+
+status.textContent="出馬表を読み取っています…";
+
+try{
+
+const r=await Tesseract.recognize(
+file,
+"jpn+eng",
+{
+logger:m=>{
+
+if(m.status==="recognizing text"){
+
+let p=Math.round(m.progress*100);
+
+bar.style.width=p+"%";
+
+status.textContent=
+"文字を読み取り中… "+p+"%";
+
+}
+
+}
+}
+);
+
+const text=r.data.text;
+
+document.getElementById("ocr").textContent=text;
+
+document.getElementById("ocrCard")
+.classList.remove("hidden");
+
+makePrediction(text);
+
+status.textContent="予想完了！";
+
+}catch(e){
+
+status.textContent=
+"読み取りに失敗しました。";
+
+}
+
+};
+
+
+function makePrediction(text){
+
+let lines=text
+.split(/\r?\n/)
+.map(x=>x.trim())
+.filter(x=>x);
+
+let horses=[];
+
+for(let line of lines){
+
+let m=line.match(
+/^(\d{1,2})\s+([^\d]{2,30}?)(?:\s+(\d+(?:\.\d+)?))?$/
+);
+
+if(!m)continue;
+
+let number=parseInt(m[1]);
+
+let name=m[2].trim();
+
+let odds=m[3]
+?parseFloat(m[3])
+:null;
+
+if(number>=1&&number<=18&&name.length>=2){
+
+if(!horses.some(h=>h.number===number)){
+
+horses.push({
+number:number,
+name:name,
+odds:odds
+});
+
+}
+
+}
+
+}
+
+if(horses.length<2){
+
+document.getElementById("resultCard")
+.classList.remove("hidden");
+
+document.getElementById("result").innerHTML=
+"<p>⚠️ 馬名を十分に読み取れませんでした。</p>";
+
+return;
+
+}
+
+
+/* AI指数 */
+
+horses.forEach((h,i)=>{
+
+let score=50;
+
+if(h.odds){
+
+if(h.odds<=3)score+=18;
+else if(h.odds<=5)score+=14;
+else if(h.odds<=10)score+=8;
+else if(h.odds<=20)score+=3;
+else score-=3;
+
+}
+
+score+=(i%7)-3;
+
+h.score=score;
+
+});
+
+
+/* シミュレーション */
+
+let wins=
+new Array(horses.length).fill(0);
+
+for(let n=0;n<1000000;n++){
+
+let best=-Infinity;
+let winner=0;
+
+for(let i=0;i<horses.length;i++){
+
+let value=
+horses[i].score*
+(0.7+Math.random()*0.6);
+
+if(value>best){
+
+best=value;
+winner=i;
+
+}
+
+}
+
+wins[winner]++;
+
+}
+
+
+horses.forEach((h,i)=>{
+
+h.prob=
+wins[i]/1000000*100;
+
+});
+
+
+horses.sort(
+(a,b)=>b.prob-a.prob
+);
+
+
+const marks=
+["◎","○","▲","△","△","☆"];
+
+
+document.getElementById("resultCard")
+.classList.remove("hidden");
+
+
+document.getElementById("result").innerHTML=
+horses.map((h,i)=>`
+
+<div class="horse">
+
+<div class="num">
+${marks[i]||"△"} ${h.number}
+</div>
+
+<div>
+
+<div class="name">
+${h.name}
+</div>
+
+<small>
+AI指数 ${h.score.toFixed(1)}
+${h.odds?" / オッズ "+h.odds:""}
+</small>
+
+</div>
+
+<div class="prob">
+${h.prob.toFixed(2)}%
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+</script>
+
+</body>
+</html>
