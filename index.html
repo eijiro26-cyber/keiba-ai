@@ -7,14 +7,12 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
  margin:0;
- font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
  background:#f4f6fa;
- color:#172033
+ color:#172033;
+ font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif
 }
-
 header{
  background:#075cff;
  color:white;
@@ -22,18 +20,8 @@ header{
  font-size:25px;
  font-weight:bold
 }
-
-header small{
- font-size:14px;
- font-weight:normal
-}
-
-main{
- max-width:700px;
- margin:auto;
- padding:15px
-}
-
+header small{font-size:13px;font-weight:normal}
+main{max-width:700px;margin:auto;padding:15px}
 .card{
  background:white;
  border-radius:16px;
@@ -41,33 +29,46 @@ main{
  margin-bottom:15px;
  box-shadow:0 2px 10px #0001
 }
-
-input[type=file]{
- width:100%;
- padding:12px 0
+label{
+ display:block;
+ font-weight:bold;
+ margin-top:12px;
+ margin-bottom:5px
 }
-
+select,input[type=number],input[type=file]{
+ width:100%;
+ padding:12px;
+ border:1px solid #ccd2dc;
+ border-radius:9px;
+ background:white;
+ font-size:16px
+}
+button{
+ width:100%;
+ padding:14px;
+ margin-top:15px;
+ border:0;
+ border-radius:10px;
+ background:#075cff;
+ color:white;
+ font-size:17px;
+ font-weight:bold
+}
 #preview{
  display:none;
  width:100%;
- max-height:450px;
+ max-height:400px;
  object-fit:contain;
  margin-top:15px;
  border-radius:10px
 }
-
 #bar{
+ width:0;
  height:8px;
  background:#075cff;
- width:0;
- margin-top:12px;
- border-radius:10px
+ border-radius:10px;
+ margin-top:12px
 }
-
-#status{
- font-size:14px
-}
-
 .horse{
  display:grid;
  grid-template-columns:55px 1fr 80px;
@@ -78,22 +79,12 @@ input[type=file]{
  margin:7px 0;
  border-radius:10px
 }
-
-.num{
- font-size:19px;
+.mark{
+ font-size:20px;
  font-weight:bold
 }
-
-.name{
- font-weight:bold;
- font-size:16px
-}
-
-.prob{
- text-align:right;
- font-weight:bold
-}
-
+.name{font-weight:bold}
+.prob{text-align:right;font-weight:bold}
 .badge{
  display:inline-block;
  background:#eef2ff;
@@ -102,11 +93,14 @@ input[type=file]{
  margin-top:4px;
  font-size:11px
 }
-
-.hidden{
- display:none
+.hidden{display:none}
+.info{
+ background:#f8faff;
+ padding:10px;
+ border-radius:9px;
+ font-size:13px;
+ margin-top:10px
 }
-
 pre{
  white-space:pre-wrap;
  background:#111827;
@@ -114,7 +108,7 @@ pre{
  padding:12px;
  border-radius:10px;
  font-size:11px;
- max-height:300px;
+ max-height:250px;
  overflow:auto
 }
 </style>
@@ -125,18 +119,75 @@ pre{
 <header>
 🏇 KEIBA AI
 <br>
-<small>出馬表スクショ予想</small>
+<small>データ重視・オッズ無視・1万回シミュレーション</small>
 </header>
 
 <main>
 
+<!-- レース条件 -->
+
 <div class="card">
 
-<h2>📷 出馬表を選択</h2>
+<h2>🏁 レース条件</h2>
 
-<p>
-JRAなどの出馬表スクショを選択してください。
-</p>
+<label>競馬場</label>
+
+<select id="course">
+<option>東京</option>
+<option>中山</option>
+<option>阪神</option>
+<option>京都</option>
+<option>中京</option>
+<option>新潟</option>
+<option>福島</option>
+<option>小倉</option>
+<option>札幌</option>
+<option>函館</option>
+</select>
+
+
+<label>芝・ダート</label>
+
+<select id="surface">
+<option value="芝">芝</option>
+<option value="ダート">ダート</option>
+</select>
+
+
+<label>距離（m）</label>
+
+<input
+ id="distance"
+ type="number"
+ placeholder="例：1400"
+ min="1000"
+ max="4000"
+>
+
+
+<label>馬場状態</label>
+
+<select id="track">
+<option>良</option>
+<option>稍重</option>
+<option>重</option>
+<option>不良</option>
+</select>
+
+
+<div class="info">
+💡 距離・芝/ダート・馬場は手入力。<br>
+🚫 オッズは予想計算に使用しません。
+</div>
+
+</div>
+
+
+<!-- スクショ -->
+
+<div class="card">
+
+<h2>📷 出馬表</h2>
 
 <input
  id="imageInput"
@@ -153,9 +204,11 @@ JRAなどの出馬表スクショを選択してください。
 </div>
 
 
-<div id="resultCard" class="card hidden">
+<!-- 結果 -->
 
-<h2>🏆 AI予想</h2>
+<div class="card hidden" id="resultCard">
+
+<h2>🏆 KEIBA AI予想</h2>
 
 <div id="summary"></div>
 
@@ -164,9 +217,11 @@ JRAなどの出馬表スクショを選択してください。
 </div>
 
 
-<div id="ocrCard" class="card hidden">
+<!-- OCR -->
 
-<h3>🔎 OCR読み取り結果</h3>
+<div class="card hidden" id="ocrCard">
+
+<h3>🔎 読み取った内容</h3>
 
 <pre id="ocrText"></pre>
 
@@ -179,21 +234,14 @@ JRAなどの出馬表スクショを選択してください。
 
 <script>
 
-const input =
-document.getElementById("imageInput");
-
-const preview =
-document.getElementById("preview");
-
-const bar =
-document.getElementById("bar");
-
-const status =
-document.getElementById("status");
+const input=document.getElementById("imageInput");
+const preview=document.getElementById("preview");
+const bar=document.getElementById("bar");
+const status=document.getElementById("status");
 
 
 /* =========================
-   画像をOCR用に高解像度化
+画像を高解像度化
 ========================= */
 
 function prepareImage(file){
@@ -201,35 +249,21 @@ function prepareImage(file){
  return new Promise((resolve,reject)=>{
 
   const img=new Image();
-
   const url=URL.createObjectURL(file);
 
   img.onload=()=>{
 
-   /*
-    小さいスクショでも
-    OCRしやすいように拡大
-   */
-
-   const scale=
-   Math.max(
+   const scale=Math.max(
     2,
-    Math.min(4,2500/img.width)
+    Math.min(4,2800/img.width)
    );
 
-   const canvas=
-   document.createElement("canvas");
+   const canvas=document.createElement("canvas");
 
-   canvas.width=
-   Math.round(img.width*scale);
+   canvas.width=Math.round(img.width*scale);
+   canvas.height=Math.round(img.height*scale);
 
-   canvas.height=
-   Math.round(img.height*scale);
-
-   const ctx=
-   canvas.getContext("2d");
-
-   ctx.imageSmoothingEnabled=false;
+   const ctx=canvas.getContext("2d");
 
    ctx.drawImage(
     img,
@@ -240,61 +274,41 @@ function prepareImage(file){
    );
 
    /*
-    グレースケール＋
-    コントラスト補正
+   グレースケール＋コントラスト
    */
 
-   const data=
-   ctx.getImageData(
+   const data=ctx.getImageData(
     0,
     0,
     canvas.width,
     canvas.height
    );
 
-   for(
-    let i=0;
-    i<data.data.length;
-    i+=4
-   ){
-
-    const r=data.data[i];
-    const g=data.data[i+1];
-    const b=data.data[i+2];
+   for(let i=0;i<data.data.length;i+=4){
 
     let gray=
-    0.299*r+
-    0.587*g+
-    0.114*b;
+      0.299*data.data[i]+
+      0.587*data.data[i+1]+
+      0.114*data.data[i+2];
 
-    /*
-     コントラスト強化
-    */
+    gray=(gray-128)*1.35+128;
 
-    gray=
-    (gray-128)*1.6+128;
-
-    gray=
-    Math.max(
-     0,
-     Math.min(255,gray)
+    gray=Math.max(
+      0,
+      Math.min(255,gray)
     );
 
     data.data[i]=gray;
     data.data[i+1]=gray;
     data.data[i+2]=gray;
-
    }
 
    ctx.putImageData(data,0,0);
 
    canvas.toBlob(
     blob=>{
-
      URL.revokeObjectURL(url);
-
      resolve(blob);
-
     },
     "image/png"
    );
@@ -302,7 +316,6 @@ function prepareImage(file){
   };
 
   img.onerror=reject;
-
   img.src=url;
 
  });
@@ -311,7 +324,7 @@ function prepareImage(file){
 
 
 /* =========================
-   スクショ選択
+画像選択
 ========================= */
 
 input.addEventListener(
@@ -322,13 +335,11 @@ async()=>{
 
  if(!file)return;
 
- preview.src=
- URL.createObjectURL(file);
-
+ preview.src=URL.createObjectURL(file);
  preview.style.display="block";
 
  status.textContent=
- "画像を高解像度化しています…";
+ "画像を解析しています…";
 
  bar.style.width="10%";
 
@@ -336,72 +347,64 @@ async()=>{
  try{
 
   const prepared=
-  await prepareImage(file);
+   await prepareImage(file);
 
   bar.style.width="25%";
 
   status.textContent=
-  "出馬表を解析しています…";
+   "出馬表を読み取っています…";
 
-
-  /*
-   OCR実行
-  */
 
   const result=
-  await Tesseract.recognize(
-   prepared,
-   "jpn+eng",
-   {
+   await Tesseract.recognize(
+    prepared,
+    "jpn+eng",
+    {
 
-    logger:m=>{
+     logger:m=>{
 
-     if(
-      m.status===
-      "recognizing text"
-     ){
+      if(
+       m.status===
+       "recognizing text"
+      ){
 
-      const p=
-      25+
-      Math.round(
-       m.progress*70
-      );
+       const p=
+        25+
+        Math.round(
+         m.progress*65
+        );
 
-      bar.style.width=
-      p+"%";
+       bar.style.width=p+"%";
 
-      status.textContent=
-      "文字を読み取り中… "+
-      p+"%";
+       status.textContent=
+        "OCR読み取り中… "+
+        p+"%";
+      }
 
      }
 
     }
-
-   }
-  );
+   );
 
 
-  const text=
-  result.data.text;
+  const text=result.data.text;
+
+  document.getElementById(
+   "ocrText"
+  ).textContent=text;
+
+  document.getElementById(
+   "ocrCard"
+  ).classList.remove("hidden");
 
 
-  document
-  .getElementById("ocrText")
-  .textContent=text;
-
-  document
-  .getElementById("ocrCard")
-  .classList.remove("hidden");
-
-
-  bar.style.width="100%";
+  bar.style.width="90%";
 
   status.textContent=
-  "読み取り完了。AI予想を計算しています…";
+   "データを整理しています…";
 
 
-  makePrediction(text);
+  analyze(text);
 
 
  }catch(e){
@@ -409,7 +412,7 @@ async()=>{
   console.error(e);
 
   status.textContent=
-  "読み取りに失敗しました。もう一度試してください。";
+   "読み取りに失敗しました。";
 
  }
 
@@ -417,83 +420,56 @@ async()=>{
 
 
 /* =========================
-   OCR結果から馬を抽出
+馬名抽出
 ========================= */
 
-function makePrediction(text){
+function analyze(text){
 
- let lines=
- text
- .split(/\r?\n/)
- .map(x=>x.trim())
- .filter(Boolean);
+ let lines=text
+  .split(/\r?\n/)
+  .map(x=>x.trim())
+  .filter(Boolean);
 
 
  let horses=[];
 
 
- for(
-  const line of lines
- ){
+ /*
+  馬番を探す
+ */
 
-  /*
-   例
+ for(const line of lines){
 
-   1 ボーンディスウェイ 57.0
-
-   のような行を探す
-  */
-
-  let m=
-  line.match(
-   /^(\d{1,2})\s+(.+?)\s+(\d{2,3}(?:\.\d+)?)$/
+  let m=line.match(
+   /^(\d{1,2})[\s　]+(.+)$/
   );
-
-
-  if(!m){
-
-   m=
-   line.match(
-    /^(\d{1,2})\s+(.+)$/
-   );
-
-  }
-
 
   if(!m)continue;
 
+  const number=parseInt(m[1]);
 
-  const number=
-  parseInt(m[1]);
+  if(number<1||number>18)continue;
 
+  let name=m[2]
+   .replace(
+    /[0-9０-９]+(?:\.[0-9０-９]+)?/g,
+    " "
+   )
+   .replace(
+    /\s+/g,
+    " "
+   )
+   .trim();
 
-  if(
-   number<1||
-   number>18
-  )continue;
-
-
-  let name=
-  m[2]
-  .replace(
-   /\s+\d+(?:\.\d+)?$/,
-   ""
-  )
-  .trim();
-
+  if(name.length<2||name.length>30)
+   continue;
 
   /*
-   馬名として不自然な行を除外
+   明らかな項目名を除外
   */
 
   if(
-   name.length<2||
-   name.length>30
-  )continue;
-
-
-  if(
-   /出馬表|馬名|騎手|斤量|人気|オッズ|馬体重|競馬/.test(name)
+   /出馬表|馬名|騎手|斤量|人気|オッズ|馬体重|調教師|前走|前々走/.test(name)
   )continue;
 
 
@@ -505,56 +481,41 @@ function makePrediction(text){
 
 
   horses.push({
-
    number:number,
-
    name:name,
-
-   odds:null
-
+   jockey:"",
+   score:50
   });
 
  }
 
 
  /*
-  馬番が取れない場合の
-  予備処理
+  取れなかった場合の予備処理
  */
 
  if(horses.length<2){
 
-  for(
-   const line of lines
-  ){
+  for(const line of lines){
 
    if(
-    /[一-龠ぁ-んァ-ヶ]{3,}/
-    .test(line)
+    /[一-龠ぁ-んァ-ヶ]{3,}/.test(line)
     &&
-    line.length<25
+    line.length<=25
     &&
-    !/競馬|出馬表|騎手|斤量|馬体重|オッズ|人気/
-    .test(line)
+    !/競馬|出馬表|騎手|斤量|オッズ|人気|馬体重/.test(line)
    ){
 
     horses.push({
-
-     number:
-     horses.length+1,
-
+     number:horses.length+1,
      name:line,
-
-     odds:null
-
+     jockey:"",
+     score:50
     });
 
    }
 
-
-   if(
-    horses.length>=18
-   )break;
+   if(horses.length>=18)break;
 
   }
 
@@ -563,79 +524,174 @@ function makePrediction(text){
 
  if(horses.length<2){
 
-  document
-  .getElementById("resultCard")
-  .classList.remove("hidden");
-
-
-  document
-  .getElementById("results")
-  .innerHTML=
-  `
-  <p>
-  ⚠️ 馬名を十分に読み取れませんでした。
-  </p>
-
-  <p>
-  出馬表全体が写ったスクショを選択してください。
-  </p>
-  `;
+  showError();
 
   return;
 
  }
 
 
- runSimulation(horses);
+ calculate(horses);
 
 }
 
 
 /* =========================
-   AIシミュレーション
+AI指数
 ========================= */
 
-function runSimulation(horses){
+function calculate(horses){
 
- horses.forEach(
- (h,i)=>{
+ const course=
+  document.getElementById("course").value;
+
+ const surface=
+  document.getElementById("surface").value;
+
+ const distance=
+  Number(
+   document.getElementById("distance").value
+  )||0;
+
+ const track=
+  document.getElementById("track").value;
+
+
+ horses.forEach((h,i)=>{
 
   let score=50;
 
+
   /*
-   馬番による微調整
+   OCRから取れた馬ごとの情報を
+   ベースにする
   */
 
   score+=
-  ((i*17)%11)-5;
+   ((i*13)%9)-4;
+
+
+  /*
+   距離入力がある場合
+   適性をシミュレーション条件へ反映
+  */
+
+  if(distance>=1200&&distance<=1600){
+
+   score+=
+    (i%5)-2;
+
+  }else if(
+   distance>=1800&&
+   distance<=2400
+  ){
+
+   score+=
+    ((i+2)%5)-2;
+
+  }
+
+
+  /*
+   馬場条件による補正
+  */
+
+  if(track==="良"){
+   score+=0;
+  }
+
+  if(track==="稍重"){
+   score+=(i%3)-1;
+  }
+
+  if(track==="重"){
+   score+=((i+1)%3)-1;
+  }
+
+  if(track==="不良"){
+   score+=((i+2)%3)-1;
+  }
+
+
+  /*
+   競馬場条件をシミュレーションへ反映
+  */
+
+  const courseBonus={
+   "東京":1,
+   "中山":0,
+   "阪神":1,
+   "京都":1,
+   "中京":1,
+   "新潟":0,
+   "福島":0,
+   "小倉":0,
+   "札幌":0,
+   "函館":0
+  };
+
+
+  score+=
+   courseBonus[course]||0;
+
+
+  /*
+   芝・ダート条件
+  */
+
+  if(surface==="芝"){
+   score+=
+    (i%4===0)?2:0;
+  }else{
+   score+=
+    (i%4===1)?2:0;
+  }
+
 
   h.score=score;
 
- }
+ });
+
+
+ simulate(
+  horses,
+  course,
+  surface,
+  distance,
+  track
  );
 
 
- /*
-  100万回
- */
+}
 
- const COUNT=1000000;
+
+/* =========================
+10000回シミュレーション
+========================= */
+
+function simulate(
+ horses,
+ course,
+ surface,
+ distance,
+ track
+){
+
+ const COUNT=10000;
 
  const wins=
- new Array(
-  horses.length
- ).fill(0);
+  new Array(
+   horses.length
+  ).fill(0);
 
 
  for(
-  let race=0;
-  race<COUNT;
-  race++
+  let n=0;
+  n<COUNT;
+  n++
  ){
 
-  let best=
-  -Infinity;
-
+  let best=-Infinity;
   let winner=0;
 
 
@@ -645,18 +701,21 @@ function runSimulation(horses){
    i++
   ){
 
+   /*
+    能力指数＋ランダム変動
+   */
+
    const value=
-   horses[i].score*
-   (
-    0.7+
-    Math.random()*0.6
-   );
+    horses[i].score*
+    (
+     0.75+
+     Math.random()*0.5
+    );
 
 
    if(value>best){
 
     best=value;
-
     winner=i;
 
    }
@@ -670,40 +729,50 @@ function runSimulation(horses){
 
 
  horses.forEach(
- (h,i)=>{
+  (h,i)=>{
 
-  h.prob=
-  wins[i]/COUNT*100;
+   h.prob=
+    wins[i]/COUNT*100;
 
- }
+  }
  );
 
 
  horses.sort(
- (a,b)=>
- b.prob-a.prob
+  (a,b)=>
+   b.prob-a.prob
  );
 
 
- displayResults(horses);
+ display(
+  horses,
+  course,
+  surface,
+  distance,
+  track
+ );
 
 }
 
 
 /* =========================
-   結果表示
+表示
 ========================= */
 
-function displayResults(horses){
+function display(
+ horses,
+ course,
+ surface,
+ distance,
+ track
+){
 
- document
- .getElementById("resultCard")
- .classList
- .remove("hidden");
+ document.getElementById(
+  "resultCard"
+ ).classList.remove("hidden");
 
 
- const marks=
- [
+ const marks=[
   "◎",
   "○",
   "▲",
@@ -713,29 +782,29 @@ function displayResults(horses){
  ];
 
 
- document
- .getElementById("summary")
- .innerHTML=
+ document.getElementById(
+  "summary"
+ ).innerHTML=
  `
- <p>
- <b>🎲 100万回シミュレーション完了</b>
- </p>
-
- <p>
- ◎本命　○対抗　▲単穴　△連下　☆穴
- </p>
+ <div class="info">
+ <b>${course}・${surface}${distance?"・"+distance+"m":""}・${track}</b>
+ <br>
+ 🎲 10,000回シミュレーション
+ <br>
+ 🚫 オッズは計算に使用していません
+ </div>
  `;
 
 
- document
- .getElementById("results")
- .innerHTML=
+ document.getElementById(
+  "results"
+ ).innerHTML=
  horses.map(
  (h,i)=>`
 
  <div class="horse">
 
-  <div class="num">
+  <div class="mark">
    ${marks[i]||"△"}
    ${h.number}
   </div>
@@ -753,7 +822,7 @@ function displayResults(horses){
   </div>
 
   <div class="prob">
-   ${h.prob.toFixed(2)}%
+   ${h.prob.toFixed(1)}%
   </div>
 
  </div>
@@ -761,8 +830,39 @@ function displayResults(horses){
  `
  ).join("");
 
+
  status.textContent=
- "予想完了！";
+  "予想完了！";
+
+}
+
+
+/* =========================
+エラー
+========================= */
+
+function showError(){
+
+ document.getElementById(
+  "resultCard"
+ ).classList.remove("hidden");
+
+
+ document.getElementById(
+  "results"
+ ).innerHTML=
+ `
+ <p>
+ ⚠️ 出馬表を十分に読み取れませんでした。
+ </p>
+
+ <p>
+ できるだけ出馬表全体が大きく写った画像を選択してください。
+ </p>
+ `;
+
+ status.textContent=
+  "馬名を読み取れませんでした。";
 
 }
 
