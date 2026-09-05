@@ -3,248 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
 <title>KEIBA AI</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:#f4f6f8;
-  color:#17202a;
-  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif
-}
-
-.wrap{
-  max-width:950px;
-  margin:auto;
-  padding:14px 12px 70px
-}
-
-.card{
-  background:#fff;
-  border-radius:18px;
-  padding:18px;
-  margin:12px 0;
-  box-shadow:0 2px 12px #0000000c
-}
-
-h1{
-  font-size:25px;
-  margin:0 0 5px
-}
-
-h2{
-  margin-top:0
-}
-
-.sub{
-  color:#667085;
-  font-size:13px
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-label{
-  display:block;
-  font-size:12px;
-  font-weight:800;
-  color:#475467;
-  margin-bottom:5px
-}
-
-input,select,button{
-  width:100%;
-  font:inherit;
-  border:1px solid #d0d5dd;
-  border-radius:11px;
-  padding:11px;
-  background:#fff
-}
-
-button{
-  border:0;
-  background:#111827;
-  color:#fff;
-  font-weight:800;
-  margin-top:10px
-}
-
-button:disabled{
-  opacity:.5
-}
-
-.secondary{
-  background:#eef2f6;
-  color:#17202a
-}
-
-.note{
-  font-size:12px;
-  color:#667085;
-  line-height:1.6
-}
-
-.status{
-  font-weight:800;
-  margin-top:8px
-}
-
-.progress{
-  height:8px;
-  background:#e4e7ec;
-  border-radius:8px;
-  overflow:hidden;
-  margin-top:8px
-}
-
-.bar{
-  height:100%;
-  width:0;
-  background:#111827;
-  transition:width .15s
-}
-
-.hidden{
-  display:none
-}
-
-.tableWrap{
-  overflow:auto
-}
-
-table{
-  width:100%;
-  min-width:1200px;
-  border-collapse:collapse;
-  font-size:12px
-}
-
-th,td{
-  padding:7px 4px;
-  border-bottom:1px solid #eaecf0;
-  text-align:left;
-  vertical-align:middle
-}
-
-th{
-  white-space:nowrap
-}
-
-td input,
-td select{
-  min-width:75px;
-  padding:7px;
-  font-size:12px
-}
-
-td.name input{
-  min-width:160px
-}
-
-.num{
-  font-size:16px;
-  font-weight:900
-}
-
-.ok{
-  color:#027a48
-}
-
-.warn{
-  color:#b54708
-}
-
-.error{
-  color:#b42318
-}
-
-.result{
-  display:grid;
-  grid-template-columns:48px 1fr auto;
-  gap:10px;
-  align-items:center;
-  padding:12px 0;
-  border-bottom:1px solid #eee
-}
-
-.rank{
-  font-size:22px;
-  font-weight:900
-}
-
-.big{
-  font-size:18px;
-  font-weight:900
-}
-
-.small{
-  font-size:11px;
-  color:#667085
-}
-
-.pill{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:99px;
-  background:#eef2f6;
-  margin:2px;
-  font-size:11px
-}
-
-#preview{
-  width:100%;
-  max-height:360px;
-  object-fit:contain;
-  margin-top:10px;
-  border-radius:10px;
-  display:none
-}
-
-pre{
-  white-space:pre-wrap;
-  word-break:break-word;
-  background:#111827;
-  color:#fff;
-  padding:12px;
-  border-radius:10px;
-  font-size:11px;
-  max-height:320px;
-  overflow:auto
-}
-
-@media(max-width:560px){
-  .grid{
-    grid-template-columns:1fr
-  }
-}
+body{margin:0;background:#f4f6f8;color:#17202a;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif}
+.wrap{max-width:980px;margin:auto;padding:14px 12px 60px}
+.card{background:#fff;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #0000000d}
+h1{font-size:26px;margin:2px 0 5px}
+.sub{color:#667085;font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:block;font-size:12px;font-weight:700;color:#475467}
+select,input,button{width:100%;font:inherit;border:1px solid #d0d5dd;border-radius:10px;padding:10px;background:#fff;margin-top:5px}
+button{border:0;background:#111827;color:#fff;font-weight:800;padding:13px;margin-top:10px}
+.secondary{background:#eef2f6;color:#17202a}
+.note{font-size:12px;color:#667085;line-height:1.55}
+.progress{height:8px;background:#e4e7ec;border-radius:9px;overflow:hidden;margin-top:8px}
+.bar{height:100%;width:0;background:#111827;transition:width .15s}
+.hidden{display:none}
+.ok{color:#027a48;font-weight:700}
+.warn{color:#b54708;font-weight:700}
+.danger{color:#b42318;font-weight:800}
+.scroll{overflow:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:1000px}
+th,td{padding:7px 5px;border-bottom:1px solid #eaecf0;text-align:left;vertical-align:middle}
+th{white-space:nowrap;background:#f8fafc}
+td input,td select{margin:0;padding:7px;min-width:70px}
+.num{font-weight:900;font-size:16px}
+.result{padding:10px 0;border-bottom:1px solid #eee}
+.rank{font-size:20px;font-weight:900}
+.big{font-size:18px;font-weight:900}
+.pill{display:inline-block;padding:4px 7px;border-radius:99px;background:#eef2f6;margin:2px;font-size:11px}
+.raw{white-space:pre-wrap;background:#111827;color:#eee;padding:12px;border-radius:10px;font-size:11px;max-height:360px;overflow:auto}
+.small{font-size:11px;color:#667085}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.wrap{padding-top:10px}}
 </style>
 </head>
 
 <body>
-
 <div class="wrap">
 
 <div class="card">
-  <h1>🏇 KEIBA AI</h1>
-  <div class="sub">
-    データ重視・オッズ完全無視・10,000回シミュレーション
-  </div>
+<h1>🏇 KEIBA AI</h1>
+<div class="sub">データ重視・オッズ完全無視・10,000回シミュレーション</div>
 </div>
 
 <div class="card">
-
 <h2>① レース条件</h2>
 
 <div class="grid">
 
-<div>
-<label>競馬場</label>
+<label>
+競馬場
 <select id="course">
 <option value="">選択してください</option>
 <option>札幌</option>
@@ -258,34 +67,33 @@ pre{
 <option>阪神</option>
 <option>小倉</option>
 </select>
-</div>
+</label>
 
-<div>
-<label>芝 / ダート</label>
+<label>
+芝 / ダート
 <select id="surface">
 <option>芝</option>
 <option>ダート</option>
 </select>
-</div>
+</label>
 
-<div>
-<label>距離（m）</label>
+<label>
+距離（m）
 <input id="distance" type="number" placeholder="例：1400">
-</div>
+</label>
 
-<div>
-<label>馬場</label>
+<label>
+馬場
 <select id="track">
 <option>良</option>
 <option>稍重</option>
 <option>重</option>
 <option>不良</option>
 </select>
-</div>
+</label>
 
 </div>
 </div>
-
 
 <div class="card">
 
@@ -293,27 +101,26 @@ pre{
 
 <input id="file" type="file" accept="image/*">
 
-<img id="preview">
-
 <div id="status" class="note">
-画像を選択してください。
+画像を選んだだけでは予想しません。
+「スクショを読み取る」を押した時だけOCRします。
 </div>
 
 <div class="progress">
 <div id="bar" class="bar"></div>
 </div>
 
-<button id="ocrBtn" class="secondary" disabled>
+<button id="ocrBtn" class="secondary">
 🔍 スクショを読み取る
 </button>
 
-<div class="note">
-画像を選択しただけでは予想しません。<br>
-「スクショを読み取る」を押した時だけOCRします。
+<div class="note" style="margin-top:8px">
+JRA出馬表の青文字から「馬名行」を判定します。
+騎手名・人気・着順などは馬名として扱いません。
+最大18頭対応。オッズは一切使用しません。
 </div>
 
 </div>
-
 
 <div class="card hidden" id="dataCard">
 
@@ -322,11 +129,11 @@ pre{
 <div id="countCheck" class="note"></div>
 
 <div class="note">
-OCR結果は必ず確認してください。<br>
-間違っている場合は、この表を直接修正できます。
+OCR後に表を修正できます。
+騎手成績は入力欄です。空欄は中立評価です。
 </div>
 
-<div class="tableWrap">
+<div class="scroll">
 
 <table>
 
@@ -337,7 +144,7 @@ OCR結果は必ず確認してください。<br>
 <th>騎手</th>
 <th>斤量</th>
 <th>馬体重</th>
-<th>過去着順</th>
+<th>着順</th>
 <th>3F</th>
 <th>脚質</th>
 <th>距離適性</th>
@@ -345,7 +152,7 @@ OCR結果は必ず確認してください。<br>
 <th>馬場適性</th>
 <th>騎手勝率%</th>
 <th>騎手複勝率%</th>
-<th>騎手調子</th>
+<th>騎手直近</th>
 </tr>
 </thead>
 
@@ -365,23 +172,16 @@ OCR結果は必ず確認してください。<br>
 
 </div>
 
-
 <div class="card hidden" id="rawCard">
-
-<h2>🔎 OCR確認ログ</h2>
-
-<pre id="raw"></pre>
-
+<h3>🔎 OCR確認ログ</h3>
+<div id="raw" class="raw"></div>
 </div>
-
 
 <div class="card hidden" id="resultCard">
 
-<h2>④ AI予想結果</h2>
+<h2>④ AI予想</h2>
 
-<div class="note">
-※オッズは一切使用していません。
-</div>
+<div id="summary"></div>
 
 <div id="results"></div>
 
@@ -393,304 +193,176 @@ OCR結果は必ず確認してください。<br>
 
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
 <script>
 
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
-let horses = [];
-
-let sourceImage = null;
-
-
-/* =========================
-   共通
-========================= */
-
-function esc(s){
-
-return String(s ?? "")
-.replace(/[&<>"']/g,m=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
-}[m]));
-
-}
-
-
-function number(v){
-
-const n=parseFloat(
-String(v ?? "")
-.replace(/[^\d.-]/g,"")
-);
-
-return Number.isFinite(n) ? n : 0;
-
-}
-
-
-function numbers(v){
-
-return String(v || "")
-.split(/[,\s、]+/)
-.map(number)
-.filter(x=>x>0);
-
-}
-
-
-function japaneseCount(s){
-
-return (
-String(s || "")
-.match(/[ぁ-んァ-ヶ一-龥]/g) || []
-).length;
-
-}
-
-
-function makeHorse(n){
-
-return {
-
-num:n,
-
-name:"",
-
-jockey:"",
-
-weight:"",
-
-body:"",
-
-fin:"",
-
-three:"",
-
-style:"",
-
-distanceFit:"",
-
-courseFit:"",
-
-goingFit:"",
-
-jw:"",
-
-jp:"",
-
-jform:"0"
-
-};
-
-}
+let horses=[];
+window.lastResult=[];
 
 
 /* =========================
-   騎手名
+   騎手リスト
 ========================= */
 
-const JOCKEYS=[
-
-"川田将雅",
-"C.ルメール",
-"ルメール",
-"戸崎圭太",
-"松山弘平",
-"坂井瑠星",
-"横山武史",
-"横山和生",
-"岩田望来",
-"北村友一",
-"西村淳也",
-"団野大成",
-"鮫島克駿",
-"菅原明良",
-"丹内祐次",
-"三浦皇成",
-"田辺裕信",
-"津村明秀",
-"丸山元気",
-"中井裕二",
-"泉谷楓真",
-"藤岡佑介",
-"武豊",
-"幸英明",
-"池添謙一",
-"藤懸貴志",
-"小沢大仁",
-"吉村誠之助",
-"高杉吏麒",
-"佐々木大輔",
-"石川裕紀人",
-"原優介",
-"大野拓弥",
-"菱田裕二",
-"国分恭介",
-"国分優作",
-"永島まなみ",
-"小林美駒",
-"今村聖奈",
-"田口貫太",
-"西塚洸二",
-"富田暁",
-"角田大和",
-"酒井学",
-"太宰啓介",
-"和田竜二",
-"古川吉洋",
-"松若風馬",
-"荻野極",
-"長岡禎仁",
-"黛弘人",
-"水口優也",
-"川須栄彦",
-"小崎綾也",
-"森裕太朗",
-"岩田康誠",
-"浜中俊"
-
+const JOCKEY_NAMES=[
+'川田将雅','C.ルメール','C ルメール','ルメール',
+'戸崎圭太','松山弘平','坂井瑠星','横山武史','横山和生',
+'岩田望来','北村友一','西村淳也','団野大成','鮫島克駿',
+'菅原明良','丹内祐次','三浦皇成','田辺裕信','津村明秀',
+'丸山元気','中井裕二','泉谷楓真','藤岡佑介','武豊',
+'幸英明','池添謙一','藤懸貴志','小沢大仁','吉村誠之助',
+'高杉吏麒','佐々木大輔','石川裕紀人','原優介','大野拓弥',
+'菱田裕二','国分恭介','国分優作','永島まなみ','小林美駒',
+'今村聖奈','田口貫太','西塚洸二','富田暁','角田大和',
+'酒井学','太宰啓介','和田竜二','和田翼','古川吉洋',
+'古川奈穂','松若風馬','荻野極','荻野琢真','長岡禎仁',
+'秋山稔樹','黛弘人','水口優也','川須栄彦','小崎綾也',
+'森裕太朗','岩田康誠','浜中俊','鮫島良太'
 ];
 
 
 /* =========================
-   表表示
+   基本処理
+========================= */
+
+function esc(s){
+return String(s??'').replace(/[&<>"']/g,m=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#39;'
+}[m]));
+}
+
+function num(v){
+const n=parseFloat(String(v??'').replace(/[^\d.-]/g,''));
+return Number.isFinite(n)?n:0;
+}
+
+function arr(s){
+return String(s||'')
+.split(/[,、\s]+/)
+.map(num)
+.filter(x=>x>0);
+}
+
+function makeHorse(n){
+return{
+num:n,
+name:'',
+jockey:'',
+weight:'',
+body:'',
+fin:'',
+three:'',
+style:'',
+dist:'',
+course:'',
+going:'',
+jw:'',
+jp:'',
+jform:'0'
+};
+}
+
+
+/* =========================
+   表
 ========================= */
 
 function render(){
 
-const tb=$("rows");
-
-tb.innerHTML="";
+const tb=$('rows');
+tb.innerHTML='';
 
 horses.sort((a,b)=>a.num-b.num);
 
 for(const h of horses){
 
-const tr=document.createElement("tr");
+const tr=document.createElement('tr');
 
 tr.innerHTML=`
 
-<td class="num">
-${h.num}
-</td>
+<td class="num">${h.num}</td>
 
-<td class="name">
-<input data-k="name"
-value="${esc(h.name)}"
-placeholder="馬名">
+<td>
+<input data-k="name" value="${esc(h.name)}" placeholder="馬名">
 </td>
 
 <td>
-<input data-k="jockey"
-value="${esc(h.jockey)}"
-placeholder="騎手">
+<input data-k="jockey" value="${esc(h.jockey)}" placeholder="騎手">
 </td>
 
 <td>
-<input data-k="weight"
-value="${esc(h.weight)}"
-placeholder="57.0">
+<input data-k="weight" value="${esc(h.weight)}" placeholder="57">
 </td>
 
 <td>
-<input data-k="body"
-value="${esc(h.body)}"
-placeholder="480">
+<input data-k="body" value="${esc(h.body)}" placeholder="480">
 </td>
 
 <td>
-<input data-k="fin"
-value="${esc(h.fin)}"
-placeholder="1,3,2,5">
+<input data-k="fin" value="${esc(h.fin)}" placeholder="1,3,2">
 </td>
 
 <td>
-<input data-k="three"
-value="${esc(h.three)}"
-placeholder="34.1,34.8">
+<input data-k="three" value="${esc(h.three)}" placeholder="34.1,34.8">
 </td>
 
 <td>
+
 <select data-k="style">
 
-<option value="" ${h.style===""?"selected":""}>不明</option>
-<option value="逃げ" ${h.style==="逃げ"?"selected":""}>逃げ</option>
-<option value="先行" ${h.style==="先行"?"selected":""}>先行</option>
-<option value="差し" ${h.style==="差し"?"selected":""}>差し</option>
-<option value="追込" ${h.style==="追込"?"selected":""}>追込</option>
+<option value="">中立</option>
+<option>逃げ</option>
+<option>先行</option>
+<option>差し</option>
+<option>追込</option>
 
 </select>
+
 </td>
 
 <td>
-<select data-k="distanceFit">
-
-<option value="" ${h.distanceFit===""?"selected":""}>不明</option>
-<option value="◎" ${h.distanceFit==="◎"?"selected":""}>◎</option>
-<option value="○" ${h.distanceFit==="○"?"selected":""}>○</option>
-<option value="△" ${h.distanceFit==="△"?"selected":""}>△</option>
-<option value="×" ${h.distanceFit==="×"?"selected":""}>×</option>
-
-</select>
+<input data-k="dist" value="${esc(h.dist)}" placeholder="0〜100">
 </td>
 
 <td>
-<select data-k="courseFit">
-
-<option value="" ${h.courseFit===""?"selected":""}>不明</option>
-<option value="◎" ${h.courseFit==="◎"?"selected":""}>◎</option>
-<option value="○" ${h.courseFit==="○"?"selected":""}>○</option>
-<option value="△" ${h.courseFit==="△"?"selected":""}>△</option>
-<option value="×" ${h.courseFit==="×"?"selected":""}>×</option>
-
-</select>
+<input data-k="course" value="${esc(h.course)}" placeholder="0〜100">
 </td>
 
 <td>
-<select data-k="goingFit">
-
-<option value="" ${h.goingFit===""?"selected":""}>不明</option>
-<option value="◎" ${h.goingFit==="◎"?"selected":""}>◎</option>
-<option value="○" ${h.goingFit==="○"?"selected":""}>○</option>
-<option value="△" ${h.goingFit==="△"?"selected":""}>△</option>
-<option value="×" ${h.goingFit==="×"?"selected":""}>×</option>
-
-</select>
+<input data-k="going" value="${esc(h.going)}" placeholder="0〜100">
 </td>
 
 <td>
-<input data-k="jw"
-value="${esc(h.jw)}"
-placeholder="20">
+<input data-k="jw" value="${esc(h.jw)}" placeholder="20">
 </td>
 
 <td>
-<input data-k="jp"
-value="${esc(h.jp)}"
-placeholder="45">
+<input data-k="jp" value="${esc(h.jp)}" placeholder="45">
 </td>
 
 <td>
-<input data-k="jform"
-value="${esc(h.jform)}"
-placeholder="-2〜+2">
+<input data-k="jform" value="${esc(h.jform)}" placeholder="-2〜+2">
 </td>
 
 `;
 
-tr.querySelectorAll("input,select").forEach(el=>{
+tr.querySelectorAll('[data-k]').forEach(inp=>{
 
-el.addEventListener("input",()=>{
+inp.value=h[inp.dataset.k]??'';
 
-h[el.dataset.k]=el.value;
+inp.addEventListener('input',()=>{
+h[inp.dataset.k]=inp.value;
+});
 
+inp.addEventListener('change',()=>{
+h[inp.dataset.k]=inp.value;
 });
 
 });
@@ -701,154 +373,147 @@ tb.appendChild(tr);
 
 checkCount();
 
-$("dataCard").classList.remove("hidden");
+$('dataCard').classList.remove('hidden');
 
 }
 
 
 /* =========================
-   頭数確認
+   頭数チェック
 ========================= */
 
 function checkCount(){
 
-const nums=horses.map(h=>h.num);
+const ns=horses
+.map(h=>h.num)
+.filter(n=>n>=1&&n<=18)
+.sort((a,b)=>a-b);
 
-if(!nums.length){
+const uniq=[...new Set(ns)];
 
-$("countCheck").innerHTML=
-'<span class="warn">馬を検出できませんでした。</span>';
+if(!uniq.length){
+
+$('countCheck').innerHTML=
+'<span class="warn">馬名を認識できませんでした。</span>';
 
 return;
+}
+
+const missing=[];
+
+for(let i=1;i<=Math.max(...uniq);i++){
+
+if(!uniq.includes(i)){
+missing.push(i);
+}
 
 }
 
-const max=Math.max(...nums);
+const duplicate=uniq.length!==horses.length;
 
-$("countCheck").innerHTML=
-`<span class="ok">
-${horses.length}頭を検出しました。
-馬番1〜${max}番。
-実際の出馬頭数と一致しているか確認してください。
-</span>`;
+$('countCheck').innerHTML=`
 
-}
+<span class="${duplicate?'danger':'ok'}">
+${uniq.length}頭を検出
+</span>
 
+${missing.length
+?'　不足番号：'+missing.join(',')
+:'　1〜'+uniq.length+'番'}
 
-/* =========================
-   画像読み込み
-========================= */
+${duplicate?'　重複番号あり':''}
 
-$("file").addEventListener("change",e=>{
-
-const file=e.target.files?.[0];
-
-if(!file)return;
-
-const reader=new FileReader();
-
-reader.onload=()=>{
-
-sourceImage=new Image();
-
-sourceImage.onload=()=>{
-
-$("preview").src=reader.result;
-
-$("preview").style.display="block";
-
-$("ocrBtn").disabled=false;
-
-$("status").textContent=
-"画像を読み込みました。「スクショを読み取る」を押してください。";
-
-};
-
-sourceImage.src=reader.result;
-
-};
-
-reader.readAsDataURL(file);
-
-});
-
-
-/* =========================
-   青色判定
-========================= */
-
-function isBlue(r,g,b){
-
-return (
-
-b>100 &&
-b>r*1.15 &&
-b>g*1.02 &&
-r<180
-
-);
+`;
 
 }
 
 
 /* =========================
-   青文字だけ抽出
+   馬名判定
 ========================= */
 
-function blueOnlyCanvas(src,x,y,w,h){
+function cleanName(s){
 
-const c=document.createElement("canvas");
+return String(s||'')
+.replace(/[\u0000-\u001f]/g,' ')
+.replace(/[|｜]/g,' ')
+.replace(/[①②③④⑤⑥⑦⑧⑨⑩]/g,' ')
+.replace(/\s+/g,' ')
+.trim();
 
-c.width=Math.max(1,Math.round(w));
+}
 
-c.height=Math.max(1,Math.round(h));
+function normalizeJP(s){
 
-const ctx=c.getContext("2d",{willReadFrequently:true});
+return cleanName(s)
+.replace(/[ 　]/g,'')
+.replace(/[「」『』（）()\[\]【】]/g,'')
+.replace(/[‐-–—-]/g,'ー');
 
-ctx.drawImage(
-src,
-Math.round(x),
-Math.round(y),
-Math.round(w),
-Math.round(h),
+}
+
+function validName(s){
+
+const n=normalizeJP(s);
+
+if(n.length<3||n.length>14)return false;
+
+if(!/[ぁ-んァ-ヶ一-龥]/.test(n))return false;
+
+if(/^(新馬|未勝利|馬名|騎手|人気|斤量|前走|中京|阪神|京都|東京|中山|福島|小倉|札幌|函館|新潟|牡|牝|セ)/.test(n))
+return false;
+
+if(JOCKEY_NAMES.some(j=>{
+const jj=normalizeJP(j);
+return n===jj||n.includes(jj);
+}))
+return false;
+
+return true;
+
+}
+
+function nameCandidates(text){
+
+const s=cleanName(text);
+
+const toks=s.match(/[ぁ-んァ-ヶ一-龥ー]{2,20}/g)||[];
+
+const uniq=[];
+
+for(const t of toks){
+
+if(validName(t)&&!uniq.includes(t)){
+uniq.push(t);
+}
+
+}
+
+uniq.sort((a,b)=>b.length-a.length);
+
+return uniq[0]||'';
+
+}
+
+
+/* =========================
+   画像
+========================= */
+
+function preprocess(img){
+
+const c=document.createElement('canvas');
+
+c.width=img.naturalWidth||img.width;
+c.height=img.naturalHeight||img.height;
+
+c.getContext('2d').drawImage(
+img,
 0,
 0,
 c.width,
 c.height
 );
-
-const d=ctx.getImageData(
-0,
-0,
-c.width,
-c.height
-);
-
-for(let i=0;i<d.data.length;i+=4){
-
-const r=d.data[i];
-
-const g=d.data[i+1];
-
-const b=d.data[i+2];
-
-if(isBlue(r,g,b)){
-
-d.data[i]=0;
-d.data[i+1]=0;
-d.data[i+2]=0;
-
-}else{
-
-d.data[i]=255;
-d.data[i+1]=255;
-d.data[i+2]=255;
-
-}
-
-}
-
-ctx.putImageData(d,0,0);
 
 return c;
 
@@ -856,300 +521,423 @@ return c;
 
 
 /* =========================
-   全体OCR
+   青文字検出
 ========================= */
 
-async function fullOCR(canvas){
+function bluePixel(r,g,b){
 
-const r=await Tesseract.recognize(
-
-canvas,
-
-"jpn+eng",
-
-{
-
-logger:m=>{
-
-if(m.status==="recognizing text"){
-
-const p=Math.round(m.progress*50);
-
-$("bar").style.width=p+"%";
-
-$("status").textContent=
-"出馬表を解析中… "+p+"%";
-
-}
-
-}
-
-}
-
+return(
+b>90 &&
+b>r*1.15 &&
+b>g*1.02 &&
+r<190 &&
+g<210
 );
-
-return r.data;
-
-}
-
-
-/* =========================
-   OCRライン候補
-========================= */
-
-function candidateLines(data,canvas){
-
-const words=(data.words||[])
-
-.filter(w=>{
-
-const text=String(w.text||"").trim();
-
-if(!text)return false;
-
-const jp=japaneseCount(text);
-
-if(jp<2)return false;
-
-const x=w.bbox.x0;
-
-const y=w.bbox.y0;
-
-const width=w.bbox.x1-w.bbox.x0;
-
-const height=w.bbox.y1-w.bbox.y0;
-
-if(x>canvas.width*.55)return false;
-
-if(y<canvas.height*.15)return false;
-
-if(y>canvas.height*.80)return false;
-
-if(height<12)return false;
-
-if(height>90)return false;
-
-return true;
-
-})
-
-.map(w=>({
-
-x:w.bbox.x0,
-
-y:w.bbox.y0,
-
-x2:w.bbox.x1,
-
-y2:w.bbox.y1,
-
-text:String(w.text).trim(),
-
-conf:Number(w.confidence||w.conf||0)
-
-}));
-
-
-const lines=[];
-
-for(const w of words.sort((a,b)=>a.y-b.y)){
-
-let line=lines.find(
-l=>Math.abs(l.y-w.y)<28
-);
-
-if(!line){
-
-line={
-y:w.y,
-x:w.x,
-x2:w.x2,
-y2:w.y2,
-words:[]
-};
-
-lines.push(line);
-
-}else{
-
-line.words.push(w);
-
-line.x=Math.min(line.x,w.x);
-
-line.x2=Math.max(line.x2,w.x2);
-
-line.y2=Math.max(line.y2,w.y2);
-
-}
-
-}
-
-for(const l of lines){
-
-if(!l.words.length)l.words=words.filter(
-w=>Math.abs(w.y-l.y)<28
-);
-
-l.text=l.words
-.sort((a,b)=>a.x-b.x)
-.map(w=>w.text)
-.join("");
-
-l.jp=japaneseCount(l.text);
-
-l.width=l.x2-l.x;
-
-l.height=l.y2-l.y;
-
-}
-
-return lines
-
-.filter(l=>l.jp>=3)
-
-.sort((a,b)=>a.y-b.y);
-
-}
-
-
-/* =========================
-   青色密度
-========================= */
-
-function blueDensity(canvas,x,y,w,h){
-
-const ctx=canvas.getContext(
-"2d",
-{willReadFrequently:true}
-);
-
-x=Math.max(0,Math.floor(x));
-
-y=Math.max(0,Math.floor(y));
-
-w=Math.min(canvas.width-x,Math.floor(w));
-
-h=Math.min(canvas.height-y,Math.floor(h));
-
-if(w<=0||h<=0)return 0;
-
-const d=ctx.getImageData(x,y,w,h).data;
-
-let blue=0;
-
-let total=0;
-
-for(let i=0;i<d.length;i+=4){
-
-const r=d[i];
-const g=d[i+1];
-const b=d[i+2];
-
-if(r>245&&g>245&&b>245)continue;
-
-total++;
-
-if(isBlue(r,g,b))blue++;
-
-}
-
-return total?blue/total:0;
-
-}
-
-
-/* =========================
-   馬名候補選択
-========================= */
-
-function selectHorseLines(lines,canvas){
-
-const candidates=[];
-
-for(const line of lines){
-
-const density=blueDensity(
-canvas,
-line.x,
-line.y,
-Math.min(line.width,canvas.width*.45),
-line.height+12
-);
-
-const score=
-
-density*100+
-
-Math.min(line.jp,12)*2+
-
-Math.min(line.height,50)*.15;
-
-if(density>.015){
-
-candidates.push({
-...line,
-density,
-score
-});
-
-}
 
 }
 
 
 /*
-  近い2行に青文字がある場合、
-  基本的に上側か文字量の多い側を馬名とする。
+JRAの出馬表では
+
+馬名
+↓
+騎手
+
+の順で青文字が並ぶ。
+
+馬名の方が文字列が長いので、
+青文字の横幅が大きい方を馬名として扱う。
 */
 
-const groups=[];
+function detectBlueBands(canvas){
 
-for(const c of candidates){
-
-let g=groups.find(
-x=>Math.abs(x.y-c.y)<55
+const ctx=canvas.getContext(
+'2d',
+{willReadFrequently:true}
 );
 
-if(!g){
+const W=canvas.width;
+const H=canvas.height;
 
-groups.push({
-y:c.y,
-items:[c]
+const x0=Math.floor(W*.02);
+const x1=Math.floor(W*.46);
+
+const y0=Math.floor(H*.08);
+const y1=Math.floor(H*.80);
+
+const rw=x1-x0;
+const rh=y1-y0;
+
+const data=ctx.getImageData(
+x0,
+y0,
+rw,
+rh
+).data;
+
+const ys=[];
+
+for(let yy=0;yy<rh;yy++){
+
+let count=0;
+let lo=99999;
+let hi=-1;
+
+for(let x=0;x<rw;x++){
+
+const p=(yy*rw+x)*4;
+
+const r=data[p];
+const g=data[p+1];
+const b=data[p+2];
+
+if(bluePixel(r,g,b)){
+
+count++;
+
+if(x<lo)lo=x;
+if(x>hi)hi=x;
+
+}
+
+}
+
+if(count>=5){
+
+ys.push({
+y:yy+y0,
+n:count,
+span:hi-lo+1,
+xmin:lo+x0,
+xmax:hi+x0
+});
+
+}
+
+}
+
+
+/* 同じ文字の上下ピクセルをまとめる */
+
+const raw=[];
+
+for(const q of ys){
+
+const last=raw[raw.length-1];
+
+if(!last||q.y-last.end>5){
+
+raw.push({
+start:q.y,
+end:q.y,
+peak:q.y,
+maxN:q.n,
+maxSpan:q.span,
+xmin:q.xmin,
+xmax:q.xmax
 });
 
 }else{
 
-g.items.push(c);
+last.end=q.y;
+
+if(q.n>last.maxN){
+
+last.peak=q.y;
+last.maxN=q.n;
+last.maxSpan=q.span;
+last.xmin=q.xmin;
+last.xmax=q.xmax;
+
+}
+
+}
+
+}
+
+return raw
+.filter(b=>b.maxSpan>=25)
+.map(b=>({
+...b,
+center:(b.start+b.end)/2
+}));
+
+}
+
+
+/* =========================
+   馬名行だけ抽出
+========================= */
+
+function horseRows(canvas){
+
+const bands=detectBlueBands(canvas);
+
+if(bands.length<2)return[];
+
+
+/*
+ここが今回の重要修正。
+
+騎手名は短い。
+馬名は長い。
+
+さらに馬名→騎手の間隔は小さい。
+
+そのため、
+・横幅
+・前後の距離
+
+の両方を見る。
+*/
+
+const candidates=[];
+
+for(let i=0;i<bands.length;i++){
+
+const b=bands[i];
+
+const prev=bands[i-1];
+const next=bands[i+1];
+
+let isHorse=b.maxSpan>=60;
+
+
+/* 前の青帯より明らかに長い */
+
+if(
+prev &&
+b.center-prev.center<115 &&
+b.maxSpan>prev.maxSpan*1.15
+){
+
+isHorse=true;
+
+}
+
+
+/* 次の青帯より明らかに長い */
+
+if(
+next &&
+next.center-b.center<115 &&
+b.maxSpan>=next.maxSpan*1.15
+){
+
+isHorse=true;
+
+}
+
+if(isHorse){
+
+candidates.push(b);
 
 }
 
 }
 
 
-const selected=[];
+/* 近すぎる重複候補を除去 */
 
-for(const g of groups){
+const out=[];
 
-g.items.sort((a,b)=>{
+for(const b of candidates){
 
-if(b.jp!==a.jp)return b.jp-a.jp;
+const last=out[out.length-1];
 
-if(b.density!==a.density)
-return b.density-a.density;
+if(
+last &&
+b.center-last.center<100
+){
 
-return b.score-a.score;
+if(b.maxSpan>last.maxSpan){
 
-});
-
-selected.push(g.items[0]);
+out[out.length-1]=b;
 
 }
 
-return selected
+}else{
 
-.sort((a,b)=>a.y-b.y)
+out.push(b);
 
-.slice(0,18);
+}
+
+}
+
+return out
+.filter(b=>
+b.center>canvas.height*.10 &&
+b.center<canvas.height*.78
+)
+.slice(0,18)
+.map(b=>({
+y:b.peak,
+x0:b.xmin,
+x1:b.xmax,
+start:b.start,
+end:b.end,
+span:b.maxSpan
+}));
+
+}
+
+
+/* =========================
+   OCR用切り抜き
+========================= */
+
+function crop(canvas,x0,y0,x1,y1,scale=3){
+
+const w=Math.max(
+1,
+Math.round(x1-x0)
+);
+
+const h=Math.max(
+1,
+Math.round(y1-y0)
+);
+
+const c=document.createElement('canvas');
+
+c.width=w*scale;
+c.height=h*scale;
+
+c.getContext('2d').drawImage(
+canvas,
+x0,
+y0,
+w,
+h,
+0,
+0,
+c.width,
+c.height
+);
+
+return c;
+
+}
+
+
+/* =========================
+   青文字だけ残す
+========================= */
+
+function blueMaskCrop(canvas,band){
+
+const padX=14;
+const padY=12;
+
+const x0=Math.max(
+0,
+band.x0-padX
+);
+
+const x1=Math.min(
+canvas.width,
+band.x1+padX
+);
+
+const y0=Math.max(
+0,
+band.start-padY
+);
+
+const y1=Math.min(
+canvas.height,
+band.end+padY
+);
+
+const ctx=canvas.getContext(
+'2d',
+{willReadFrequently:true}
+);
+
+const src=ctx.getImageData(
+x0,
+y0,
+x1-x0,
+y1-y0
+);
+
+const tmp=document.createElement('canvas');
+
+tmp.width=x1-x0;
+tmp.height=y1-y0;
+
+const out=new Uint8ClampedArray(
+src.data.length
+);
+
+for(
+let i=0;
+i<src.data.length;
+i+=4
+){
+
+const r=src.data[i];
+const g=src.data[i+1];
+const b=src.data[i+2];
+
+const v=bluePixel(r,g,b)
+?0
+:255;
+
+out[i]=v;
+out[i+1]=v;
+out[i+2]=v;
+out[i+3]=255;
+
+}
+
+tmp
+.getContext('2d')
+.putImageData(
+new ImageData(
+out,
+tmp.width,
+tmp.height
+),
+0,
+0
+);
+
+const c=document.createElement('canvas');
+
+c.width=tmp.width*3;
+c.height=tmp.height*3;
+
+c.getContext('2d').drawImage(
+tmp,
+0,
+0,
+c.width,
+c.height
+);
+
+return c;
+
+}
+
+
+/* =========================
+   Tesseract
+========================= */
+
+async function ocrCanvas(c,psm){
+
+const r=await Tesseract.recognize(
+c,
+'jpn+eng',
+{
+psm:psm,
+preserve_interword_spaces:true
+}
+);
+
+return r.data.text||'';
 
 }
 
@@ -1158,75 +946,141 @@ return selected
    馬名OCR
 ========================= */
 
-async function horseNameOCR(canvas,line){
+async function ocrName(canvas,band){
 
-const padX=12;
+const candidates=[];
 
-const padY=8;
-
-const x=Math.max(0,line.x-padX);
-
-const y=Math.max(0,line.y-padY);
-
-const w=Math.min(
-canvas.width-x,
-Math.max(line.width+padX*2,220)
-);
-
-const h=Math.min(
-canvas.height-y,
-Math.max(line.height+padY*2,60)
-);
-
-const blue=blueOnlyCanvas(
+const masked=blueMaskCrop(
 canvas,
-x,
-y,
-w,
-h
+band
 );
 
-const r=await Tesseract.recognize(
 
-blue,
+/*
+4種類のPSMで読む。
+*/
 
-"jpn",
+for(
+const psm of [7,13,6,11]
+){
 
-{
+const raw=await ocrCanvas(
+masked,
+psm
+);
 
-psm:7,
+const n=nameCandidates(raw);
 
-preserve_interword_spaces:false
+if(n){
+
+candidates.push({
+n:n,
+psm:psm,
+raw:raw
+});
 
 }
 
-);
-
-return cleanHorseName(r.data.text||"");
-
 }
 
 
-/* =========================
-   馬名整理
-========================= */
+/*
+青文字だけで読めなかった場合、
+馬名行を少し広く切って再OCR。
+*/
 
-function cleanHorseName(s){
-
-return String(s||"")
-
-.replace(/[\u0000-\u001f]/g," ")
-
-.replace(/\s+/g," ")
-
-.replace(/^[^ぁ-んァ-ヶ一-龥A-Za-z0-9]+/,"")
-
-.replace(
-/^(馬名|騎手|人気|斤量|馬体重|調教師)\s*/,
-""
+if(
+!candidates.length ||
+candidates.every(
+x=>normalizeJP(x.n).length<4
 )
+){
 
-.trim();
+const y0=Math.max(
+0,
+band.y-28
+);
+
+const y1=Math.min(
+canvas.height,
+band.y+34
+);
+
+const wide=crop(
+canvas,
+Math.max(0,band.x0-20),
+y0,
+Math.min(canvas.width,band.x1+45),
+y1,
+3
+);
+
+for(
+const psm of [7,6,11,13]
+){
+
+const raw=await ocrCanvas(
+wide,
+psm
+);
+
+const n=nameCandidates(raw);
+
+if(n){
+
+candidates.push({
+n:n,
+psm:psm,
+raw:raw
+});
+
+}
+
+}
+
+}
+
+
+/*
+複数OCRで一致した名前を優先。
+*/
+
+const score={};
+
+for(const c of candidates){
+
+const k=normalizeJP(c.n);
+
+score[k]=(score[k]||0)+1;
+
+}
+
+let best='';
+let bestScore=-1;
+
+for(const c of candidates){
+
+const k=normalizeJP(c.n);
+
+const sc=
+score[k]*100+
+k.length;
+
+if(sc>bestScore){
+
+bestScore=sc;
+best=c.n;
+
+}
+
+}
+
+return{
+name:cleanName(best),
+text:candidates
+.map(c=>`PSM${c.psm}: ${c.raw}`)
+.join(' | ')
+};
 
 }
 
@@ -1235,132 +1089,81 @@ return String(s||"")
    行OCR
 ========================= */
 
-async function rowOCR(canvas,line){
-
-const top=Math.max(
-0,
-line.y-25
-);
-
-const bottom=Math.min(
-canvas.height,
-line.y+Math.max(70,line.height+45)
-);
-
-const x=0;
-
-const width=Math.min(
-canvas.width,
-canvas.width*.72
-);
-
-const c=document.createElement("canvas");
-
-c.width=Math.round(width);
-
-c.height=Math.round(bottom-top);
-
-const ctx=c.getContext("2d");
-
-ctx.drawImage(
+async function ocrRegion(
 canvas,
 x,
-top,
-width,
-bottom-top,
-0,
-0,
-c.width,
-c.height
+y,
+w,
+h,
+psm
+){
+
+return ocrCanvas(
+crop(
+canvas,
+x,
+y,
+x+w,
+y+h,
+2
+),
+psm
 );
-
-const r=await Tesseract.recognize(
-
-c,
-
-"jpn+eng",
-
-{
-
-psm:6
-
-}
-
-);
-
-return String(r.data.text||"")
-.replace(/\s+/g," ")
-.trim();
 
 }
 
 
 /* =========================
-   行情報抽出
+   斤量・馬体重・騎手
 ========================= */
 
-function parseRow(txt){
+function parseFields(s){
 
-const s=String(txt||"")
-.replace(/\s+/g," ")
+const t=String(s||'')
+.replace(/\n+/g,' ')
+.replace(/\s+/g,' ')
 .trim();
 
-let jockey="";
+let jockey='';
 
-for(const j of JOCKEYS){
+for(const j of JOCKEY_NAMES){
 
-if(s.includes(j)){
+if(t.includes(j)){
 
 jockey=j;
-
 break;
 
 }
 
 }
 
-
-let weight="";
-
-const wm=s.match(
+const weight=
+(
+t.match(
 /(?:^|\s)(5[0-9]|60)(?:\.0)?\s*kg/
-);
+)||[]
+)[1]||'';
 
-if(wm)weight=wm[1];
+const body=
+(
+t.match(
+/(?:^|\s)([3-5][0-9]{2})\s*kg/
+)||[]
+)[1]||'';
 
-
-let body="";
-
-const bm=s.match(
-/(?:^|\s)(3[8-9][0-9]|4[0-9]{2}|5[0-9]{2})(?:\s*kg)?/
-);
-
-if(bm)body=bm[1];
-
-
-const th=[
-
-...s.matchAll(
-/(?:3F|３F)\s*([0-9]{2}\.[0-9])/g
+const three=[
+...t.matchAll(
+/(?:3F|３F)\s*([0-9]{2}\.\d)/g
 )
-
 ]
-
-.map(x=>x[1])
-
-.join(",");
-
+.map(m=>m[1])
+.join(',');
 
 return{
-
 jockey,
-
 weight,
-
 body,
-
-three:th
-
+three
 };
 
 }
@@ -1370,207 +1173,565 @@ three:th
    OCR本体
 ========================= */
 
-async function runOCR(){
+async function ocr(){
 
-if(!sourceImage){
+const f=$('file').files[0];
 
-$("status").textContent=
-"先に画像を選択してください。";
+if(!f){
+
+$('status').textContent=
+'先に画像を選んでください。';
 
 return;
 
 }
 
-$("ocrBtn").disabled=true;
-
-$("bar").style.width="2%";
-
-$("status").textContent=
-"出馬表を解析しています…";
-
+$('ocrBtn').disabled=true;
+$('bar').style.width='2%';
 
 try{
 
-const scale=Math.min(
-2.2,
-2000/sourceImage.width
+const img=await new Promise(
+(res,rej)=>{
+
+const i=new Image();
+
+i.onload=()=>res(i);
+i.onerror=rej;
+
+i.src=URL.createObjectURL(f);
+
+}
 );
 
-const canvas=document.createElement("canvas");
+const c=preprocess(img);
 
-canvas.width=Math.round(
-sourceImage.width*scale
-);
+const rows=horseRows(c);
 
-canvas.height=Math.round(
-sourceImage.height*scale
-);
-
-const ctx=canvas.getContext(
-"2d",
-{willReadFrequently:true}
-);
-
-ctx.imageSmoothingEnabled=true;
-
-ctx.drawImage(
-sourceImage,
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-
-$("bar").style.width="8%";
-
-
-const data=await fullOCR(canvas);
-
-
-$("bar").style.width="55%";
-
-
-const lines=candidateLines(
-data,
-canvas
-);
-
-
-const selected=selectHorseLines(
-lines,
-canvas
-);
-
-
-if(selected.length<2){
+if(rows.length<2){
 
 throw new Error(
-"馬名候補が見つかりませんでした"
+'馬名行が検出できませんでした'
 );
 
 }
-
 
 horses=[];
 
 const logs=[];
 
-
-for(let i=0;i<selected.length;i++){
-
-const line=selected[i];
-
-$("status").textContent=
-`馬名を確認中… ${i+1}/${selected.length}`;
-
-
-let name=await horseNameOCR(
-canvas,
-line
-);
-
-
-/*
- OCRが短すぎる場合は
- 元のOCR文字列を第2候補として使用
-*/
-
-if(
-japaneseCount(name)<2 ||
-name.length<2
+for(
+let i=0;
+i<rows.length;
+i++
 ){
 
-name=cleanHorseName(
-line.text
+const y=rows[i].y;
+
+const prev=
+i
+?rows[i-1].y
+:y-150;
+
+const next=
+i<rows.length-1
+?rows[i+1].y
+:y+150;
+
+const top=Math.max(
+0,
+Math.round((prev+y)/2)
 );
 
-}
-
-
-const rowText=await rowOCR(
-canvas,
-line
+const bottom=Math.min(
+c.height,
+Math.round((y+next)/2)
 );
 
-const fields=parseRow(rowText);
 
+/* 馬名 */
+
+const nm=await ocrName(
+c,
+rows[i]
+);
+
+
+/* 行全体 */
+
+const rowText=await ocrRegion(
+c,
+c.width*.02,
+top,
+c.width*.62,
+bottom-top,
+6
+);
+
+const fields=parseFields(
+rowText
+);
 
 const h=makeHorse(i+1);
 
-h.name=name;
-
+h.name=nm.name;
 h.jockey=fields.jockey;
-
 h.weight=fields.weight;
-
 h.body=fields.body;
-
 h.three=fields.three;
-
 
 horses.push(h);
 
-
 logs.push(
-`【${i+1}番候補】\n`+
-`馬名OCR：${name}\n`+
-`元OCR：${line.text}\n`+
-`青色密度：${(line.density*100).toFixed(1)}%\n`+
-`行OCR：${rowText}`
+`--- ${i+1}番 ---
+馬名OCR: ${nm.text}
+行OCR: ${rowText}`
 );
 
+$('bar').style.width=
+(
+5+
+(i+1)/rows.length*92
+)+'%';
 
-$("bar").style.width=
-55+(i+1)/selected.length*40
-+"%";
+$('status').textContent=
+`OCR中… ${i+1}/${rows.length}行`;
 
 }
 
 
-$("raw").textContent=
-logs.join("\n\n");
+$('raw').textContent=
+logs.join('\n\n');
 
-$("rawCard").classList.remove("hidden");
+$('rawCard').classList.remove(
+'hidden'
+);
 
 render();
 
-$("bar").style.width="100%";
+const bad=horses.some(
+h=>!validName(h.name)
+);
 
-$("status").textContent=
-`OCR完了：${horses.length}頭。表を確認してください。`;
+$('status').textContent=
+bad
+?`OCR完了：${horses.length}頭。ただし馬名に要確認があります。`
+:`OCR完了：${horses.length}頭。馬名を確認してください。`;
 
-}
-catch(e){
+$('bar').style.width='100%';
+
+checkCount();
+
+}catch(e){
 
 console.error(e);
 
-$("status").textContent=
-"馬名の読み取りに失敗しました。JRA出馬表全体が写った画像を使用してください。";
+$('status').textContent=
+'OCRに失敗しました。JRA出馬表全体が写った画像を使用してください。';
 
-}
-finally{
+}finally{
 
-$("ocrBtn").disabled=false;
-
-}
+$('ocrBtn').disabled=false;
 
 }
 
-
-$("ocrBtn").addEventListener(
-"click",
-runOCR
-);
+}
 
 
 /* =========================
-   馬追加
+   シミュレーション
 ========================= */
 
-$("addBtn").addEventListener(
-"click",
-()=>{
+function styleBonus(
+style,
+surface,
+distance
+){
+
+if(!style)return 0;
+
+const d=num(distance);
+
+if(
+surface==='芝' &&
+d<=1400
+){
+
+return style==='逃げ'
+?2.5
+:style==='先行'
+?2
+:style==='差し'
+?1
+:0;
+
+}
+
+if(
+surface==='芝' &&
+d>=1800
+){
+
+return style==='差し'
+?2.5
+:style==='追込'
+?1.8
+:style==='先行'
+?1.5
+:0;
+
+}
+
+if(
+surface==='ダート' &&
+d<=1400
+){
+
+return style==='逃げ'
+?2.5
+:style==='先行'
+?2
+:style==='差し'
+?1
+:0;
+
+}
+
+return style==='先行'
+?1.2
+:style==='差し'
+?1.2
+:0;
+
+}
+
+
+function scoreHorse(h){
+
+const fin=arr(h.fin);
+const three=arr(h.three);
+
+let s=50;
+
+
+/* 過去着順 */
+
+if(fin.length){
+
+const avg=
+fin.reduce((a,b)=>a+b,0)/
+fin.length;
+
+s+=Math.max(
+-12,
+14-avg*2.2
+);
+
+s+=
+fin.filter(x=>x<=3).length*
+2.2;
+
+}
+
+
+/* 3F */
+
+if(three.length){
+
+const avg=
+three.reduce((a,b)=>a+b,0)/
+three.length;
+
+s+=Math.max(
+-8,
+Math.min(
+8,
+(36-avg)*2.2
+)
+);
+
+}
+
+
+/* 適性 */
+
+s+=
+(num(h.dist)-50)*.10;
+
+s+=
+(num(h.course)-50)*.08;
+
+s+=
+(num(h.going)-50)*.08;
+
+
+/* 騎手 */
+
+s+=
+num(h.jw)*.10;
+
+s+=
+num(h.jp)*.06;
+
+s+=
+num(h.jform)*1.5;
+
+
+/* 脚質 */
+
+s+=styleBonus(
+h.style,
+$('surface').value,
+$('distance').value
+);
+
+
+/* 馬体重 */
+
+const bw=num(h.body);
+
+if(bw){
+
+s-=Math.abs(
+bw-480
+)*.015;
+
+}
+
+
+/* 斤量 */
+
+const kg=num(h.weight);
+
+if(kg){
+
+s-=Math.abs(
+kg-56
+)*.08;
+
+}
+
+return s;
+
+}
+
+
+function randn(){
+
+let u=0;
+let v=0;
+
+while(!u)u=Math.random();
+while(!v)v=Math.random();
+
+return Math.sqrt(
+-2*Math.log(u)
+)*
+Math.cos(
+2*Math.PI*v
+);
+
+}
+
+
+/* =========================
+   10,000回
+========================= */
+
+function simulate(){
+
+if(horses.length<2){
+
+alert(
+'先にスクショを読み取ってください。'
+);
+
+return;
+
+}
+
+const nums=horses.map(
+h=>h.num
+);
+
+const uniq=[
+...new Set(nums)
+];
+
+
+/*
+不正な馬名・重複番号なら
+シミュレーションしない。
+*/
+
+if(
+uniq.length!==horses.length ||
+horses.some(
+h=>!validName(h.name)
+)
+){
+
+alert(
+'馬番または馬名に未確認のデータがあります。表を確認・修正してから実行してください。'
+);
+
+return;
+
+}
+
+const n=10000;
+
+const S=horses.map(
+h=>({
+h:h,
+score:scoreHorse(h),
+win:0,
+top:0
+})
+);
+
+
+for(
+let r=0;
+r<n;
+r++
+){
+
+const a=S
+.map(
+(x,i)=>({
+i:i,
+s:x.score+randn()*7
+})
+)
+.sort(
+(a,b)=>b.s-a.s
+);
+
+a.forEach(
+(x,k)=>{
+
+if(k===0)
+S[x.i].win++;
+
+if(k<3)
+S[x.i].top++;
+
+}
+);
+
+}
+
+
+S.forEach(x=>{
+
+x.wp=
+x.win/n*100;
+
+x.tp=
+x.top/n*100;
+
+});
+
+
+S.sort(
+(a,b)=>b.wp-a.wp
+);
+
+window.lastResult=S;
+
+
+$('summary').innerHTML=`
+
+<span class="pill">
+${$('course').value||'競馬場未選択'}
+</span>
+
+<span class="pill">
+${$('surface').value}
+</span>
+
+<span class="pill">
+${$('distance').value||'?'}m
+</span>
+
+<span class="pill">
+${$('track').value}
+</span>
+
+<p class="big">
+◎ ${esc(
+S[0].h.num+
+'番 '+
+S[0].h.name
+)}
+</p>
+
+<div>
+勝率 ${S[0].wp.toFixed(1)}%
+　
+3着内 ${S[0].tp.toFixed(1)}%
+</div>
+
+<div class="note">
+オッズは計算に一切使用していません。
+10,000回モンテカルロ。
+</div>
+
+`;
+
+
+$('results').innerHTML=
+S.map(
+(x,i)=>`
+
+<div class="result">
+
+<span class="rank">
+${['◎','○','▲','△','☆'][i]||'△'}
+</span>
+
+<b>
+${x.h.num}番 ${esc(x.h.name)}
+</b>
+
+<br>
+
+<span class="small">
+モデル指数 ${x.score.toFixed(1)}
+　
+勝率 ${x.wp.toFixed(1)}%
+　
+3着内 ${x.tp.toFixed(1)}%
+</span>
+
+</div>
+
+`
+)
+.join('');
+
+
+$('resultCard').classList.remove(
+'hidden'
+);
+
+window.scrollTo({
+top:$('resultCard').offsetTop-10,
+behavior:'smooth'
+});
+
+}
+
+
+/* =========================
+   ボタン
+========================= */
+
+$('ocrBtn').onclick=ocr;
+
+
+$('addBtn').onclick=()=>{
 
 const used=new Set(
 horses.map(h=>h.num)
@@ -1578,15 +1739,12 @@ horses.map(h=>h.num)
 
 let n=1;
 
-while(used.has(n)&&n<=18)n++;
+while(
+used.has(n)&&
+n<=18
+)n++;
 
-if(n>18){
-
-alert("18頭までです");
-
-return;
-
-}
+if(n<=18){
 
 horses.push(
 makeHorse(n)
@@ -1595,582 +1753,44 @@ makeHorse(n)
 render();
 
 }
-);
 
+};
 
-/* =========================
-   適性評価
-========================= */
 
-function symbolScore(v){
+$('simBtn').onclick=simulate;
 
-switch(v){
 
-case"◎":return 6;
+$('copyBtn').onclick=()=>{
 
-case"○":return 3;
+const t=[
 
-case"△":return -2;
+'KEIBA AI予想',
 
-case"×":return -5;
+`${$('course').value}・${$('surface').value}・${$('distance').value}m・${$('track').value}`,
 
-default:return 0;
+'オッズ完全無視',
 
-}
-
-}
-
-
-/* =========================
-   脚質評価
-========================= */
-
-function styleScore(style){
-
-const course=$("course").value;
-
-const distance=number(
-$("distance").value
-);
-
-if(!style)return 0;
-
-
-/*
- 中京1400など短距離は
- 先行・逃げを少し評価
-*/
-
-if(
-course==="中京" &&
-distance>=1200 &&
-distance<=1600
-){
-
-if(style==="先行")return 5;
-
-if(style==="逃げ")return 4;
-
-if(style==="差し")return 2;
-
-if(style==="追込")return -1;
-
-}
-
-
-/*
- 東京・新潟の長めは差しも評価
-*/
-
-if(
-(course==="東京"||course==="新潟") &&
-distance>=1600
-){
-
-if(style==="差し")return 5;
-
-if(style==="追込")return 3;
-
-if(style==="先行")return 2;
-
-if(style==="逃げ")return 0;
-
-}
-
-return 2;
-
-}
-
-
-/* =========================
-   過去成績
-========================= */
-
-function finishScore(fin){
-
-const a=numbers(fin);
-
-if(!a.length)return 0;
-
-let score=0;
-
-for(let i=0;i<a.length;i++){
-
-const p=a[i];
-
-let s=0;
-
-if(p===1)s=10;
-else if(p===2)s=7;
-else if(p===3)s=5;
-else if(p===4)s=3;
-else if(p===5)s=2;
-else if(p<=8)s=0;
-else s=-2;
-
-score+=s*(1-i*.12);
-
-}
-
-return score/a.length;
-
-}
-
-
-/* =========================
-   3F
-========================= */
-
-function threeScore(three){
-
-const a=numbers(three);
-
-if(!a.length)return 0;
-
-const avg=
-a.reduce((x,y)=>x+y,0)/a.length;
-
-
-/*
- 3Fが速いほどプラス
-*/
-
-if(avg<=33.5)return 9;
-
-if(avg<=34.0)return 7;
-
-if(avg<=34.5)return 5;
-
-if(avg<=35.0)return 3;
-
-if(avg<=35.5)return 1;
-
-if(avg<=36.0)return -1;
-
-return -3;
-
-}
-
-
-/* =========================
-   体重
-========================= */
-
-function bodyScore(body){
-
-const b=number(body);
-
-if(!b)return 0;
-
-if(b<430)return -2;
-
-if(b<=520)return 2;
-
-return -1;
-
-}
-
-
-/* =========================
-   騎手
-========================= */
-
-function jockeyScore(h){
-
-let s=0;
-
-const win=number(h.jw);
-
-const place=number(h.jp);
-
-if(win){
-
-if(win>=25)s+=6;
-
-else if(win>=18)s+=4;
-
-else if(win>=12)s+=2;
-
-else if(win<5)s-=2;
-
-}
-
-if(place){
-
-if(place>=50)s+=5;
-
-else if(place>=40)s+=3;
-
-else if(place>=30)s+=1;
-
-else if(place<20)s-=2;
-
-}
-
-const form=number(h.jform);
-
-s+=Math.max(-4,Math.min(4,form));
-
-return s;
-
-}
-
-
-/* =========================
-   総合スコア
-========================= */
-
-function modelScore(h){
-
-let s=50;
-
-
-/*
- 過去成績
-*/
-
-s+=finishScore(h.fin)*2.2;
-
-
-/*
- 3F
-*/
-
-s+=threeScore(h.three)*1.5;
-
-
-/*
- 適性
-*/
-
-s+=symbolScore(h.distanceFit);
-
-s+=symbolScore(h.courseFit);
-
-s+=symbolScore(h.goingFit);
-
-
-/*
- 脚質
-*/
-
-s+=styleScore(h.style);
-
-
-/*
- 馬体重
-*/
-
-s+=bodyScore(h.body);
-
-
-/*
- 騎手
-*/
-
-s+=jockeyScore(h);
-
-
-/*
- 斤量
-*/
-
-const w=number(h.weight);
-
-if(w){
-
-if(w<=55)s+=2;
-
-else if(w>=59)s-=2;
-
-}
-
-
-/*
- 微小な乱数はシミュレーション時のみ入れる。
- 馬番には一切補正しない。
-*/
-
-return s;
-
-}
-
-
-/* =========================
-   正規乱数
-========================= */
-
-function randn(){
-
-let u=0;
-
-let v=0;
-
-while(!u)u=Math.random();
-
-while(!v)v=Math.random();
-
-return Math.sqrt(
--2*Math.log(u)
-)*Math.cos(
-2*Math.PI*v
-);
-
-}
-
-
-/* =========================
-   10,000回シミュレーション
-========================= */
-
-function simulate(){
-
-if(horses.length<2){
-
-alert("2頭以上必要です");
-
-return;
-
-}
-
-
-const distance=number(
-$("distance").value
-);
-
-if(!$("course").value){
-
-alert("競馬場を選択してください");
-
-return;
-
-}
-
-if(!distance){
-
-alert("距離を入力してください");
-
-return;
-
-}
-
-
-const sims=10000;
-
-
-/*
- 各馬の基礎スコア
-*/
-
-const S=horses.map(h=>({
-
-h,
-
-score:modelScore(h),
-
-wins:0,
-
-top3:0,
-
-sumRank:0
-
-}));
-
-
-$("status").textContent=
-"10,000回シミュレーション中…";
-
-
-/*
- Monte Carlo
-*/
-
-for(let r=0;r<sims;r++){
-
-const order=S
-
-.map((x,i)=>({
-
-i,
-
-score:
-x.score+
-randn()*7
-
-}))
-
-.sort(
-(a,b)=>b.score-a.score
-);
-
-
-for(let k=0;k<order.length;k++){
-
-const x=S[order[k].i];
-
-const rank=k+1;
-
-if(rank===1)x.wins++;
-
-if(rank<=3)x.top3++;
-
-x.sumRank+=rank;
-
-}
-
-}
-
-
-for(const x of S){
-
-x.win=x.wins/sims*100;
-
-x.top=x.top3/sims*100;
-
-x.avg=x.sumRank/sims;
-
-}
-
-
-/*
- 勝率順
-*/
-
-S.sort(
-(a,b)=>b.win-a.win
-);
-
-
-/*
- 結果表示
-*/
-
-const out=$("results");
-
-out.innerHTML="";
-
-
-S.forEach((x,i)=>{
-
-const marks=[
-"◎",
-"○",
-"▲",
-"△",
-"☆"
-];
-
-const mark=
-marks[i]||"";
-
-
-const div=document.createElement(
-"div"
-);
-
-div.className="result";
-
-div.innerHTML=`
-
-<div class="rank">
-${mark}
-</div>
-
-<div>
-
-<div class="big">
-${x.h.num}番 ${esc(x.h.name)}
-</div>
-
-<div class="small">
-
-勝率 ${x.win.toFixed(1)}%　
-
-3着内 ${x.top.toFixed(1)}%　
-
-平均着順 ${x.avg.toFixed(2)}
-
-</div>
-
-</div>
-
-<div class="pill">
-${x.score.toFixed(1)}
-</div>
-
-`;
-
-out.appendChild(div);
-
-});
-
-
-$("resultCard").classList.remove(
-"hidden"
-);
-
-window.lastResult=S;
-
-$("status").textContent=
-"計算完了：10,000回";
-
-
-window.scrollTo({
-
-top:$("resultCard").offsetTop-10,
-
-behavior:"smooth"
-
-});
-
-}
-
-
-/* =========================
-   結果コピー
-========================= */
-
-$("copyBtn").addEventListener(
-"click",
-()=>{
-
-if(!window.lastResult)return;
-
-const lines=[
-
-"🏇 KEIBA AI予想",
-
-`${$("course").value}・${$("surface").value}・${$("distance").value}m・${$("track").value}`,
-
-"オッズ完全無視",
-
-"",
+'',
 
 ...window.lastResult
 .slice(0,5)
-.map((x,i)=>
-`${["◎","○","▲","△","☆"][i]} ${x.h.num}番 ${x.h.name}　勝率${x.win.toFixed(1)}%　3着内${x.top.toFixed(1)}%`
+.map(
+(x,i)=>
+`${['◎','○','▲','△','☆'][i]} ${x.h.num} ${x.h.name} 勝率${x.wp.toFixed(1)}% 3着内${x.tp.toFixed(1)}%`
 )
 
-];
+].join('\n');
 
-const text=lines.join("\n");
-
-
-if(navigator.clipboard){
-
-navigator.clipboard.writeText(text)
-.then(()=>alert("コピーしました"))
-.catch(()=>alert(text));
-
-}else{
-
-alert(text);
-
-}
-
-}
+navigator.clipboard
+?.writeText(t)
+.then(
+()=>alert('コピーしました')
+)
+.catch(
+()=>alert(t)
 );
+
+};
 
 </script>
 
